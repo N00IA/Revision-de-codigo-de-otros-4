@@ -1,0 +1,63 @@
+package papeltijera;
+//eer la entrada del usuario
+import java.util.Scanner;
+public class Tarea3 {
+ 
+		public static void main(String[] args) {
+		// TODO Auto-generated method stub
+			
+		Scanner scanner = new Scanner(System.in);
+		
+        // Solicitar la entrada del jugador 1
+        System.out.print("Turno del jugador 1 (introduzca piedra, papel o tijeras): ");
+        String j1 = scanner.nextLine().trim().toLowerCase();
+
+        // Solicitar la entrada del jugador 2
+        System.out.print("Turno del jugador 2 (introduzca piedra, papel o tijeras): ");
+        String j2 = scanner.nextLine().trim().toLowerCase();
+
+      
+        // Validar entradas
+        //isValidChoice  Verifica si las entradas son válidas
+        if (!isValidChoice(j1) || !isValidChoice(j2)) {
+            System.out.println("Entrada inválida. Debe ser piedra, papel o tijeras.");
+           //Si alguna entrada es inválida, se muestra un mensaje de error
+            return;
+        }
+
+        // Determinar el ganador
+        int winner = determineWinner(j1, j2);
+        if (winner == 0) {
+            System.out.println("Empate");
+        } else {
+            System.out.println("Gana el jugador " + winner);
+        }
+
+        // Cerrar el scanner
+        scanner.close();
+    }
+
+    // Función para validar la entrada del jugador
+		//validchoice verifica si la la opcion es valida
+    private static boolean isValidChoice(String choice) {
+        return choice.equals("piedra") || choice.equals("papel") || choice.equals("tijeras");
+    }
+
+    // Función para determinar el ganador
+    private static int determineWinner(String j1, String j2) {
+        if (j1.equals(j2)) {
+            return 0; // Empate
+        }
+
+        switch (j1) {
+            case "piedra":
+                return (j2.equals("tijeras")) ? 1 : 2;
+            case "papel":
+                return (j2.equals("piedra")) ? 1 : 2;
+            case "tijeras":
+                return (j2.equals("papel")) ? 1 : 2;
+            default:
+                return -1; // No debería llegar aquí debido a la validación previa
+        }
+    }
+}
